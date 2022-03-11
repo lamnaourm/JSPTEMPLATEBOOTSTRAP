@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.prods.metier.IMetier;
+import com.prods.metier.MetierProduit;
+import com.prods.models.Produit;
+
 /**
  * Servlet implementation class Controller
  */
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+      IMetier<Produit> metier = new MetierProduit();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,6 +39,7 @@ public class Controller extends HttpServlet {
 			break;
 		case "2": 	
 			request.setAttribute("page", "../pages/listprod.jsp");
+			request.setAttribute("listprod", metier.getAll());
 			break;
 		case "3": 	
 			request.setAttribute("page", "../pages/addprod.jsp");

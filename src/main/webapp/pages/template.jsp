@@ -51,7 +51,17 @@
 	<!-- Morris Chart Js -->
 	<script src="pages/assets/js/morris/raphael-2.1.0.min.js"></script>
 	<script src="pages/assets/js/morris/morris.js"></script>
+	 <!-- DATA TABLE SCRIPTS -->
+    <script src="pages/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="pages/assets/js/dataTables/dataTables.bootstrap.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
 	<!-- Custom Js -->
 	<script src="pages/assets/js/custom-scripts.js"></script>
+	
+	 
 </body>
 </html>
