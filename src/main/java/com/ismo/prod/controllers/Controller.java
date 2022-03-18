@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.prods.metier.IMetier;
+import com.prods.metier.MetierFamille;
 import com.prods.metier.MetierProduit;
+import com.prods.models.Famille;
 import com.prods.models.Produit;
 
 /**
@@ -17,7 +19,8 @@ import com.prods.models.Produit;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      IMetier<Produit> metier = new MetierProduit();
+      IMetier<Produit> metierProduit = new MetierProduit();
+      IMetier<Famille> metierFamille = new MetierFamille();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,13 +39,26 @@ public class Controller extends HttpServlet {
 		switch (mode) {
 		case "1": 	
 			request.setAttribute("page", "../pages/acceuil.jsp");
+			request.setAttribute("nbproduit", metierProduit.getAll().size());
 			break;
 		case "2": 	
 			request.setAttribute("page", "../pages/listprod.jsp");
-			request.setAttribute("listprod", metier.getAll());
+			request.setAttribute("listprod", metierProduit.getAll());
 			break;
 		case "3": 	
 			request.setAttribute("page", "../pages/addprod.jsp");
+			request.setAttribute("familles", metierFamille.getAll());
+			break;
+		case "4": 	
+			Produit p = new Produit();
+			Famille f = new Famille();
+			p.setDescription(request.getParameter("libelle"));
+			p.setPrix_achat(Double.valueOf(request.getParameter("pachat")));
+			p.setPrix_vente(Double.valueOf(request.getParameter("pvente")));
+			f.setId(Integer.valueOf(request.getParameter("famille")));
+			p.setFamille(f);
+			request.setAttribute("page", "../pages/addprod.jsp");
+			request.setAttribute("success", metierProduit.save(p));
 			break;
 		}
 		

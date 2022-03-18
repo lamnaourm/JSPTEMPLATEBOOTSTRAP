@@ -15,4 +15,10 @@ public class MetierProduit implements IMetier<Produit> {
 		return dao.getAll();
 	}
 
+	@Override
+	public boolean save(Produit obj) {
+		// TODO Auto-generated method stub
+		return dao.save(obj);
+	}
+
 }

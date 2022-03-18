@@ -15,27 +15,44 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-6">
-						<form role="form">
+
+						<c:if test="${not empty success}">
+							<c:choose>
+								<c:when test="${success}">
+									<div class="alert alert-success">
+										<strong>Insere avec succes</strong>
+									</div>
+								</c:when>
+								<c:when test="${not success}">
+									<div class="alert alert-danger">
+										<strong>Echec d'insertion</strong>
+									</div>
+								</c:when>
+							</c:choose>
+						</c:if>
+						
+						<form role="form" action="Controller">
+							<input type="hidden" name="mode" value="4">
 							<div class="form-group">
 								<label>Libelle produit : </label> <input class="form-control"
-									placeholder="Enter text" type="text">
+									placeholder="Enter libelle produit" type="text" name="libelle"
+									required>
 							</div>
 							<div class="form-group">
-								<label>Famille Produit : </label> <select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
+								<label>Famille Produit : </label> <select class="form-control"
+									name="famille">
+									<c:forEach items="${familles}" var="fa">
+										<option value="${fa.id}">${fa.id}- ${fa.name}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group">
 								<label>Prix achat : </label> <input class="form-control"
-									placeholder="Enter text" type="number">
+									placeholder="Enter text" type="number" name="pachat" required>
 							</div>
 							<div class="form-group">
 								<label>Prix vente : </label> <input class="form-control"
-									placeholder="Enter text" type="number">
+									placeholder="Enter text" type="number" name="pvente" required>
 							</div>
 							<button type="submit" class="btn btn-default">Ajouter
 								produit</button>
